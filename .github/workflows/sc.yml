@@ -55,12 +55,6 @@ jobs:
             }
           fi
       
-      - name: 推送更改
-        run: |
-          git push origin $(git branch --show-current) --force-with-lease
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
       - name: 创建同步报告
         if: always()
         run: |
