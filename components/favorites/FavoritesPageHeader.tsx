@@ -73,7 +73,7 @@ export function FavoritesPageHeader({
               onClick={onClearAll}
               className="px-4 py-2 rounded-[var(--radius-full)] bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-color)] hover:bg-[color-mix(in_srgb,var(--accent-color)_10%,transparent)] transition-all text-sm flex items-center gap-2"
             >
-              <Icons.Trash2 size={16} />
+              <Icons.Trash size={16} />
               清空收藏
             </button>
           )}

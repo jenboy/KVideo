@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect, memo } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo, memo } from 'react';
 import { VideoCard } from '@/components/search/VideoCard';
 import { FavoritesEmptyState } from './FavoritesEmptyState';
 import type { FavoriteItem, Video } from '@/lib/types';
@@ -20,16 +20,20 @@ export const FavoritesGrid = memo(function FavoritesGrid({
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Convert FavoriteItem to Video format
-  const videos: Video[] = favorites.map((favorite) => ({
-    vod_id: favorite.videoId,
-    vod_name: favorite.title,
-    vod_pic: favorite.poster,
-    vod_remarks: favorite.remarks,
-    vod_year: favorite.year,
-    type_name: favorite.type,
-    source: favorite.source,
-    sourceName: favorite.sourceName,
-  }));
+  const videos: Video[] = useMemo(
+    () =>
+      favorites.map((favorite) => ({
+        vod_id: favorite.videoId,
+        vod_name: favorite.title,
+        vod_pic: favorite.poster,
+        vod_remarks: favorite.remarks,
+        vod_year: favorite.year,
+        type_name: favorite.type,
+        source: favorite.source,
+        sourceName: favorite.sourceName,
+      })),
+    [favorites]
+  );
 
   // Setup intersection observer for infinite scroll
   useEffect(() => {
